@@ -1,6 +1,6 @@
 import torch
 
-from vision_transformer.vision_transformer import VisionTransformer
+from vision_transformer import VisionTransformer
 
 
 def main():
