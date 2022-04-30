@@ -16,14 +16,11 @@ class DataModulePL(pytorch_lightning.LightningDataModule):
         self.train_dataset = DataSetMap(train_dataset)
         self.val_dataset = DataSetMap(val_dataset)
 
-    def collate(self, x):
-        return x
-
     def train_dataloader(self):
         return DataLoader(
             self.train_dataset,
-            num_workers=self.num_workers,
-            collate_fn=self.collate,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers
         )
 
     def val_dataloader(self):
