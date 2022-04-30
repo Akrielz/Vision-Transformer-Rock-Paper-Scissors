@@ -38,7 +38,7 @@ def main():
     num_trainable_param = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"Num of trainable params = {num_trainable_param}")
 
-    pl_module = VisionTransformerPL(model)
+    pl_module = VisionTransformerPL(model=model, lr=1e-4)
 
     datamodule = DataModulePL(
         dataset,

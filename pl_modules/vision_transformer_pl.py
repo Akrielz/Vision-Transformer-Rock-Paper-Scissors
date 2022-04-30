@@ -9,10 +9,11 @@ from torch import nn
 
 
 class VisionTransformerPL(pl.LightningModule):
-    def __init__(self, model: nn.Module):
+    def __init__(self, model: nn.Module, lr: float = 1e-3):
         super().__init__()
 
         self.model = model
+        self.lr = lr
 
     def __step__(self, imgs, targets):
         predicted = self.model(imgs)
@@ -31,4 +32,4 @@ class VisionTransformerPL(pl.LightningModule):
         return loss
 
     def configure_optimizers(self):
-        return torch.optim.Adam(lr=1e-2, params=self.model.parameters())
+        return torch.optim.Adam(lr=self.lr, params=self.model.parameters())
