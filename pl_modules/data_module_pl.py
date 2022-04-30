@@ -1,10 +1,10 @@
-import pytorch_lightning
+import pytorch_lightning as pl
 import torch.utils.data
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader
 
 
-class DataModulePL(pytorch_lightning.LightningDataModule):
+class DataModulePL(pl.LightningDataModule):
     def __init__(self, dataset, batch_size=2, num_workers=4):
         super().__init__()
 
