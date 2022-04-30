@@ -5,6 +5,7 @@ import cv2 as cv
 import torch
 from einops import rearrange
 from torch.utils.data import TensorDataset
+from tqdm import tqdm
 
 from data_manager.code.download_dataset import __STORAGE_RAW_PATH__, get_data_local
 
@@ -36,7 +37,11 @@ def load_dataset(split: Literal["train", "test"], verbose: bool = False):
         img_label_path = os.path.join(path, img_label)
 
         file_names = os.listdir(img_label_path)
-        for file_name in file_names:
+
+        if verbose:
+            print(f"Collecting data for {img_label}")
+
+        for file_name in tqdm(file_names):
             file_path = os.path.join(img_label_path, file_name)
             image_tensor = rgb_read_image(file_path)
             images.append(image_tensor)
