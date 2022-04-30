@@ -20,7 +20,7 @@ class VisionTransformer(nn.Module):
             depth: int,
             heads: int,
             mlp_dim: int,
-            pool: Literal["cls", "mean"] = 'cls',
+            pool: Literal["cls", "mean"] = 'mean',
             channels: int = 3,
             dim_head: int = 64,
             dropout: float = 0.0,

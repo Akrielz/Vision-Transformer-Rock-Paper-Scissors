@@ -33,6 +33,7 @@ def main():
         dropout=0.1,
         emb_dropout=0.1,
         apply_rotary_emb=True,
+        pool="mean",
     )
 
     num_trainable_param = sum(p.numel() for p in model.parameters() if p.requires_grad)
