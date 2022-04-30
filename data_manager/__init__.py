@@ -1,1 +1,1 @@
-from data_manager.code.data_getter import get_data_local
+from data_manager.code.load_dataset import load_dataset, get_image_shape
