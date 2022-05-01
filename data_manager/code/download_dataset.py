@@ -1,3 +1,5 @@
+import sys
+
 import wget
 import os
 from zipfile import ZipFile
@@ -16,6 +18,12 @@ __TEST_FILE_NAME__ = "test.zip"
 __FILE_NAMES__ = [__TRAIN_FILE_NAME__, __TEST_FILE_NAME__]
 
 
+def bar_progress(current, total, *args):
+    progress_message = f"Downloading: {current / total * 100} [{current} / {total}] bytes"
+    sys.stdout.write("\r" + progress_message)
+    sys.stdout.flush()
+
+
 def download_files(verbose: bool = False):
     if not os.path.isdir(__STORAGE_ZIP_PATH__):
         os.makedirs(__STORAGE_ZIP_PATH__)
@@ -31,7 +39,7 @@ def download_files(verbose: bool = False):
         if verbose:
             print(f"Downloading {full_file_path}")
 
-        wget.download(__TRAIN_URL__, full_file_path)
+        wget.download(__TRAIN_URL__, full_file_path, bar=bar_progress)
 
         if verbose:
             print(f"Download finished.")
