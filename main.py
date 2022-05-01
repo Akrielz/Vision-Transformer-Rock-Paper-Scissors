@@ -7,7 +7,9 @@ from vision_transformer import VisionTransformer
 
 
 def main():
-    dataset = load_dataset(split="train", verbose=False)
+    dataset = load_dataset(split="train", verbose=True)
+
+    return None
 
     gpus = -1 if torch.cuda.device_count() else 0
 

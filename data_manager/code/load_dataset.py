@@ -12,7 +12,7 @@ from data_manager.code.download_dataset import __STORAGE_RAW_PATH__, get_data_lo
 __IMAGE_SIZE__ = 300
 __IMAGE_SHAPE__ = (3, __IMAGE_SIZE__, __IMAGE_SIZE__)
 
-__SUB_DIR__ = "rps"
+__SUB_DIR__ = {"train": "rps", "test": "rps-test-set"}
 
 __LABELS_STR__ = ["rock", "paper", "scissors"]
 
@@ -28,7 +28,7 @@ def rgb_read_image(img_path: str):
 def load_dataset(split: Literal["train", "test"], verbose: bool = False):
     get_data_local(verbose)
 
-    path = os.path.join(__STORAGE_RAW_PATH__, split, __SUB_DIR__)
+    path = os.path.join(__STORAGE_RAW_PATH__, split, __SUB_DIR__[split])
 
     targets = []
     images = []

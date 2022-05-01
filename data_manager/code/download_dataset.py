@@ -39,7 +39,7 @@ def download_files(verbose: bool = False):
         if verbose:
             print(f"Downloading {full_file_path}")
 
-        wget.download(__TRAIN_URL__, full_file_path, bar=bar_progress)
+        wget.download(file_url, full_file_path, bar=bar_progress)
 
         if verbose:
             print(f"Download finished.")
