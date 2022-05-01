@@ -5,7 +5,7 @@
 - [Description](#description)
 - [Team Members](#team-members)
 - [Model - Vision Transformer](#model---vision-transformer)
-- [Data](#data)
+- [Dataset](#dataset)
 
 ## Description
 
@@ -106,7 +106,7 @@ Dimension of the MLP (FeedForward) layer.
 Number of image's channels. 
 
 
-- `dropout`: float between `[0, 1]`, default `0.`.  
+- `dropout`: float between `[0, 1]`, default `0`.  
 Dropout rate. 
 
 
@@ -125,7 +125,7 @@ Determines if token pooling or mean pooling is applied
 - `apply_rotary_emb`: bool, default `False`.  
 If enabled, applies rotary_embedding in Attention blocks.
 
-## Data
+## Dataset
 
 ### General
 
