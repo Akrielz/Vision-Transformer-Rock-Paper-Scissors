@@ -30,8 +30,8 @@ def model_train():
         depth=6,
         heads=16,
         mlp_dim=2048,
-        dropout=0.1,
-        emb_dropout=0.1,
+        dropout=0.3,
+        emb_dropout=0.3,
         apply_rotary_emb=True,
         pool="mean",
     )
