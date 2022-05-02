@@ -6,7 +6,7 @@ from pl_modules import VisionTransformerPL, DataModulePL
 from vision_transformer import VisionTransformer
 
 
-def main():
+def model_train():
     dataset = load_dataset(split="train", verbose=True)
 
     gpus = -1 if torch.cuda.device_count() else 0
@@ -43,13 +43,13 @@ def main():
 
     datamodule = DataModulePL(
         dataset,
-        batch_size=32,
-        num_workers=0
+        batch_size=16,
+        num_workers=4
     )
 
     trainer.fit(pl_module, datamodule)
 
 
 if __name__ == '__main__':
-    main()
+    model_train()
 
