@@ -31,6 +31,8 @@ if __name__ == "__main__":
 
     pl_module = VisionTransformerPL.load_from_checkpoint(checkpoint_path, model=model)
 
+    pl_module.model.eval()
+
     prediction_logits = pl_module.model(img)
 
     prediction = int(torch.argmax(prediction_logits))

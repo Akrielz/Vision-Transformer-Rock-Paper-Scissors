@@ -29,6 +29,8 @@ model = VisionTransformer(
 
 pl_module = VisionTransformerPL.load_from_checkpoint(checkpoint_path, model=model)
 
+pl_module.model.eval()
+
 
 @app.post("/image")
 async def predict(request: Request):
