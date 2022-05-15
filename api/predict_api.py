@@ -1,10 +1,7 @@
-import base64
-from io import BytesIO
-
 import torch
 from fastapi import FastAPI, Request
-from PIL import Image
 
+from api.convert_image import convert_image
 from pl_modules import VisionTransformerPL
 from vision_transformer import VisionTransformer
 from data_manager.code.load_dataset import __LABELS_STR__
@@ -36,7 +33,7 @@ pl_module.model.eval()
 async def predict(request: Request):
     img_base64 = await request.json()
 
-    img = Image.open(BytesIO(base64.b64decode(img_base64)))
+    img = convert_image(img_base64)
 
     prediction_logits = pl_module.model(img)
 
