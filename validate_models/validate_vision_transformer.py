@@ -3,7 +3,7 @@ from typing import Literal
 import torch
 
 from data_manager.code.load_dataset import load_dataset
-from pl_modules import VisionTransformerPL, DataModulePL
+from pl_modules import HandClassifierPL, DataModulePL
 from vision_transformer import VisionTransformer
 
 import pytorch_lightning as pl
@@ -28,7 +28,7 @@ def model_validate(split: Literal["train", "test"] = "train"):
         pool="mean",
     )
 
-    pl_module = VisionTransformerPL.load_from_checkpoint(checkpoint_path, model=model)
+    pl_module = HandClassifierPL.load_from_checkpoint(checkpoint_path, model=model)
 
     gpus = -1 if torch.cuda.device_count() else 0
 

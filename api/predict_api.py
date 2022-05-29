@@ -2,7 +2,7 @@ import torch
 from fastapi import FastAPI, Request
 
 from api.convert_image import convert_image
-from pl_modules import VisionTransformerPL
+from pl_modules import HandClassifierPL
 from vision_transformer import VisionTransformer
 from data_manager.code.load_dataset import __LABELS_STR__
 
@@ -24,7 +24,7 @@ model = VisionTransformer(
     pool="mean",
 )
 
-pl_module = VisionTransformerPL.load_from_checkpoint(checkpoint_path, model=model)
+pl_module = HandClassifierPL.load_from_checkpoint(checkpoint_path, model=model)
 
 pl_module.model.eval()
 

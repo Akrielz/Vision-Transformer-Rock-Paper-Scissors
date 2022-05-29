@@ -1,9 +1,9 @@
 import torch
 import pytorch_lightning as pl
+from torchvision.models import resnet50
 
 from data_manager import load_dataset
-from pl_modules import VisionTransformerPL, DataModulePL
-from vision_transformer import VisionTransformer
+from pl_modules import HandClassifierPL, DataModulePL
 
 
 def model_train():
@@ -22,24 +22,12 @@ def model_train():
         gpus=gpus
     )
 
-    model = VisionTransformer(
-        image_size=300,
-        patch_size=30,
-        num_classes=3,
-        dim=1024,
-        depth=6,
-        heads=16,
-        mlp_dim=2048,
-        dropout=0.3,
-        emb_dropout=0.3,
-        apply_rotary_emb=True,
-        pool="mean",
-    )
+    model = resnet50(pretrained=False, num_classes=3)
 
     num_trainable_param = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"Num of trainable params = {num_trainable_param}")
 
-    pl_module = VisionTransformerPL(model=model, lr=1e-4)
+    pl_module = HandClassifierPL(model=model, lr=1e-4)
 
     datamodule = DataModulePL(
         dataset,

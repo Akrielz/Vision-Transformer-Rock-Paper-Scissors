@@ -9,7 +9,7 @@ from pytorch_lightning.utilities.types import STEP_OUTPUT
 from torch import nn
 
 
-class VisionTransformerPL(pl.LightningModule):
+class HandClassifierPL(pl.LightningModule):
     def __init__(self, model: nn.Module, lr: float = 1e-3):
         super().__init__()
 
