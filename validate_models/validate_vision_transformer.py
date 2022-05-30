@@ -12,7 +12,7 @@ import pytorch_lightning as pl
 def model_validate(split: Literal["train", "test"] = "train"):
     dataset = load_dataset(split=split, verbose=True)
 
-    checkpoint_path = "lightning_logs/version_24/checkpoints/epoch=4-step=629.ckpt"
+    checkpoint_path = "lightning_logs/version_30/checkpoints/epoch=10-step=1385.ckpt"
 
     model = VisionTransformer(
         image_size=300,
