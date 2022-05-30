@@ -5,13 +5,13 @@ from torch.utils.data import DataLoader
 
 
 class DataModulePL(pl.LightningDataModule):
-    def __init__(self, dataset, batch_size=2, num_workers=4):
+    def __init__(self, dataset, batch_size=2, num_workers=4, split_ratio=0.8):
         super().__init__()
 
         self.batch_size = batch_size
         self.num_workers = num_workers
 
-        train_dataset, val_dataset = train_test_split(dataset, test_size=0.2, random_state=0)
+        train_dataset, val_dataset = train_test_split(dataset, test_size=1.0 - split_ratio, random_state=0)
 
         self.train_dataset = DataSetMap(train_dataset)
         self.val_dataset = DataSetMap(val_dataset)

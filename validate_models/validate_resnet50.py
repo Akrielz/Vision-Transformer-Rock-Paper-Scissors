@@ -12,7 +12,7 @@ import pytorch_lightning as pl
 def model_validate(split: Literal["train", "test"] = "train"):
     dataset = load_dataset(split=split, verbose=True)
 
-    checkpoint_path = "lightning_logs/version_28/checkpoints/epoch=0-step=125.ckpt"
+    checkpoint_path = "lightning_logs/version_29/checkpoints/epoch=8-step=1133.ckpt"
 
     model = resnet50(pretrained=False, num_classes=3)
 
