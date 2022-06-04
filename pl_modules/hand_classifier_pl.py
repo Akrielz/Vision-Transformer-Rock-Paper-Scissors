@@ -10,15 +10,24 @@ from torch import nn
 
 
 class HandClassifierPL(pl.LightningModule):
-    def __init__(self, model: nn.Module, lr: float = 1e-3):
+    def __init__(
+            self,
+            model: nn.Module,
+            lr: float = 1e-3,
+            image_augmenter: Optional[nn.Module] = None
+    ):
         super().__init__()
 
         self.model = model
         self.lr = lr
+        self.image_augmenter = image_augmenter
 
         self.accuracy = torchmetrics.Accuracy()
 
     def __step__(self, imgs, targets, *, mode):
+        if self.image_augmenter:
+            imgs = torch.cat([imgs, self.image_augmenter(imgs)], dim=0)
+
         predicted = self.model(imgs)
         loss = F.cross_entropy(predicted, targets)
 
