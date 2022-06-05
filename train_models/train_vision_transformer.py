@@ -1,6 +1,7 @@
 import torch
 import pytorch_lightning as pl
 
+from data_augmenter.data_augmenter import create_data_augmenter
 from data_manager import load_dataset
 from pl_modules import HandClassifierPL, DataModulePL
 from vision_transformer import VisionTransformer
@@ -36,10 +37,12 @@ def model_train():
         pool="mean",
     )
 
+    augmetor = create_data_augmenter()
+
     num_trainable_param = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"Num of trainable params = {num_trainable_param}")
 
-    pl_module = HandClassifierPL(model=model, lr=1e-4)
+    pl_module = HandClassifierPL(model=model, lr=2e-5, image_augmenter=augmetor)
 
     datamodule = DataModulePL(
         dataset,

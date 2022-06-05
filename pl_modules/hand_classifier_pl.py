@@ -27,6 +27,7 @@ class HandClassifierPL(pl.LightningModule):
     def __step__(self, imgs, targets, *, mode):
         if self.image_augmenter:
             imgs = torch.cat([imgs, self.image_augmenter(imgs)], dim=0)
+            targets = torch.cat([targets, targets], dim=0)
 
         predicted = self.model(imgs)
         loss = F.cross_entropy(predicted, targets)
