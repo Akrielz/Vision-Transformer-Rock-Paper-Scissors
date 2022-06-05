@@ -75,3 +75,115 @@ def get_all_errors(img):
     elif error_rock <= error_scissors:
         return 2
     return 3
+
+
+######################## SVM with EFD - 92.37% test accuracy ###########################
+
+# Get EFD descriptors
+def get_x_descriptor(img):
+    r,g,b = cv2.split(img)
+    r = 255 - r
+    contours, _ = cv.findContours(r, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+    fd = []
+    for cnt in contours:
+        coeffs = elliptic_fourier_descriptors(np.squeeze(cnt), order=10, normalize=True)
+        fd.append(coeffs.flatten()[3:])
+       
+    return np.mean(np.array(fd), axis=0)
+
+def prepare_data():
+    X = []
+    Y = []
+    with os.scandir('./data_manager/storage/raw/train/rps/scissors/') as it:
+        for entry in it:
+            image = cv2.imread(entry.path)
+            batch = img_generator.flow(np.reshape(image, (1, 300, 300, 3)), batch_size=1)
+            
+            try:
+                fdesc = get_x_descriptor(image)
+                X.append(copy.deepcopy(fdesc)) # pooling strategy here (task 3)
+                Y.append(3)
+                
+                fdesc = get_x_descriptor(next(batch)[0].astype('uint8'))
+                X.append(copy.deepcopy(fdesc)) # pooling strategy here (task 3)
+                Y.append(3)
+            except np.AxisError:
+                continue # some corrupted images
+    
+    with os.scandir('./data_manager/storage/raw/train/rps/rock/') as it:
+        for entry in it:
+            image = cv2.imread(entry.path)
+            batch = img_generator.flow(np.reshape(image, (1, 300, 300, 3)), batch_size=1)
+            
+            try:
+                fdesc = get_x_descriptor(image)
+                X.append(copy.deepcopy(fdesc)) # pooling strategy here (task 3)
+                Y.append(2)
+                
+                fdesc = get_x_descriptor(next(batch)[0].astype('uint8'))
+                X.append(copy.deepcopy(fdesc)) # pooling strategy here (task 3)
+                Y.append(2)
+            except np.AxisError:
+                continue # some corrupted images
+                
+    with os.scandir('./data_manager/storage/raw/train/rps/paper/') as it:
+        for entry in it:
+            image = cv2.imread(entry.path)
+            batch = img_generator.flow(np.reshape(image, (1, 300, 300, 3)), batch_size=1)
+            
+            try:
+                fdesc = get_x_descriptor(image)
+                X.append(copy.deepcopy(fdesc)) # pooling strategy here (task 3)
+                Y.append(1)
+                
+                fdesc = get_x_descriptor(next(batch)[0].astype('uint8'))
+                X.append(copy.deepcopy(fdesc)) # pooling strategy here (task 3)
+                Y.append(1)
+            except np.AxisError:
+                continue # some corrupted images
+    return np.array(X), np.array(Y)
+
+def prepare_data_test():
+    X = []
+    Y = []
+    with os.scandir('./data_manager/storage/raw/test/rps/scissors/') as it:
+        for entry in it:
+            image = cv2.imread(entry.path)
+            try:
+                fdesc = get_x_descriptor(image)
+                X.append(copy.deepcopy(fdesc)) # pooling strategy here (task 3)
+                Y.append(3)
+            except np.AxisError:
+                continue # some corrupted images
+    
+    with os.scandir('./data_manager/storage/raw/test/rps/rock/') as it:
+        for entry in it:
+            image = cv2.imread(entry.path)
+            try:
+                fdesc = get_x_descriptor(image)
+                X.append(copy.deepcopy(fdesc)) # pooling strategy here (task 3)
+                Y.append(2)
+            except np.AxisError:
+                continue # some corrupted images
+                
+    with os.scandir('./data_manager/storage/raw/test/rps/paper/') as it:
+        for entry in it:
+            image = cv2.imread(entry.path)
+            try:
+                fdesc = get_x_descriptor(image)
+                X.append(copy.deepcopy(fdesc)) # pooling strategy here (task 3)
+                Y.append(1)
+            except np.AxisError:
+                continue # some corrupted images
+    return np.array(X), np.array(Y)
+
+def get_accuracy():
+    scaler = StandardScaler()
+    x_train2 = scaler.fit_transform(x_train)
+    x_test2 = scaler.transform(x_test)
+
+    clf =  SVC(C=800000, kernel='rbf', gamma='auto')
+    clf.fit(x_train2, y_train)
+    predictions = clf.predict(x_test2)
+
+    print("Classification accuracy: {}".format(accuracy_score(y_test, predictions)))
