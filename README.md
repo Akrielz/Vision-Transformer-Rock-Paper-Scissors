@@ -29,7 +29,7 @@ functional online Rock Paper Scissors game, using just the webcams.
 
 ## Model - Vision Transformer
 
-### Arhitecture Desgin
+### Architecture Design
 
 The model is a [Vision Transformer](https://openreview.net/pdf?id=YicbFdNTTy),
 implemented in [PyTorch](https://pytorch.org/), following the template provided
