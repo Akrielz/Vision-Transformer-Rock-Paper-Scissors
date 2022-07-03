@@ -21,7 +21,10 @@ functional online Rock Paper Scissors game, using just the webcams.
     [LinkedIn](https://www.linkedin.com/in/alexandru-%C8%99tirbu-748068177/) | 
     [GitHub](https://github.com/Akrielz)
   )
-- Alexandru Cojocariu ( LinkedIn | GitHub )
+- Alexandru Cojocariu (
+    [LinkedIn](https://www.linkedin.com/in/alexandru-cojocariu-067345244/) | 
+    [GitHub](https://github.com/CojocariuAlexandru)
+  )
 - Mihai Craciun ( 
     [LinkedIn](https://www.linkedin.com/in/craciun-m-3366aa122/) | 
     [GitHub](https://github.com/NiceDayZ)
