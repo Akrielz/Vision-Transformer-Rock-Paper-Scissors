@@ -29,6 +29,13 @@ functional online Rock Paper Scissors game, using just the webcams.
     [LinkedIn](https://www.linkedin.com/in/craciun-m-3366aa122/) | 
     [GitHub](https://github.com/NiceDayZ)
   )
+  
+### Contributors
+
+# Contributors
+<a href="https://github.com/Akrielz/Vision-Transformer-Rock-Paper-Scissors/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=Akrielz/Vision-Transformer-Rock-Paper-Scissors" width = 500/>
+</a>
 
 ## Model - Vision Transformer
 
