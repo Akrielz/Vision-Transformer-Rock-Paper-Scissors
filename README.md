@@ -32,9 +32,8 @@ functional online Rock Paper Scissors game, using just the webcams.
   
 ### Contributors
 
-# Contributors
 <a href="https://github.com/Akrielz/Vision-Transformer-Rock-Paper-Scissors/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=Akrielz/Vision-Transformer-Rock-Paper-Scissors" width = 500/>
+  <img src="https://contributors-img.web.app/image?repo=Akrielz/Vision-Transformer-Rock-Paper-Scissors" width = 200/>
 </a>
 
 ## Model - Vision Transformer
